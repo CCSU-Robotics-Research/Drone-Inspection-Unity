@@ -7,13 +7,11 @@ UDP_PORT = 5005
 
 running = True
 
-def handle_sigint():
+def handle_sigint(_signum, _frame):
     global running
     running = False
 
 def main():
-    global running
-
     signal.signal(signal.SIGINT, handle_sigint)
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
