@@ -7,7 +7,7 @@ UDP_PORT = 5005
 
 running = True
 
-def handle_sigint(signum, frame):
+def handle_sigint():
     global running
     running = False
 
