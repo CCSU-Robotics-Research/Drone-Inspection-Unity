@@ -2,22 +2,14 @@ import signal
 import socket
 import sys
 
-UDP_IP = "0.0.0.0"
-UDP_PORT = 5005
-
 running = True
 
 def handle_sigint(_signum, _frame):
     global running
     running = False
 
-#def userInput():
-#    global UDP_IP, UDP_PORT
-#    UDP_IP = input("Please provide an IP address:")
-#    UDP_PORT = input("Please provide a UDP port:")
-
 def main():
-    global UDP_IP, UDP_PORT
+    UDP_IP, UDP_PORT
 
     args = sys.argv[1:]
 
@@ -25,20 +17,20 @@ def main():
         UDP_IP = "0.0.0.0"
         UDP_PORT = 5005
     elif(len(args) == 2): # input for each
-        UDP_IP = sys.argv[1]
-        UDP_PORT = sys.argv[2]
+        UDP_IP = args[1]
+        UDP_PORT = args[2]
 
         try: # is port a valid integer ?
             UDP_PORT = int(UDP_PORT)
         except ValueError: 
             print("Port must be a number. Please provide both an IP and a port using: python udp_receiver.py [ip] [port]")
-            sys.exit()
+            sys.exit(1)
     elif(len(args) == 1): # missing input
         print("Please provide both an IP and a port using: python udp_receiver.py [ip] [port]")
-        sys.exit()
+        sys.exit(1)
     else: # >2 inputs
         print("Too many arguments.")
-        sys.exit()
+        sys.exit(1)
 
     signal.signal(signal.SIGINT, handle_sigint)
 
