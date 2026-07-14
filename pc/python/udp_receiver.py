@@ -9,7 +9,8 @@ def handle_sigint(_signum, _frame):
     running = False
 
 def main():
-    UDP_IP, UDP_PORT
+    UDP_IP = '0.0.0.0'
+    UDP_PORT = 5005
 
     args = sys.argv[1:]
 
