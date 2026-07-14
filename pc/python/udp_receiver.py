@@ -14,10 +14,7 @@ def main():
 
     args = sys.argv[1:]
 
-    if(len(args) == 0): # no input -> use default
-        UDP_IP = "0.0.0.0"
-        UDP_PORT = 5005
-    elif(len(args) == 2): # input for each
+    if(len(args) == 2): # input for each
         UDP_IP = args[1]
         UDP_PORT = args[2]
 
