@@ -56,12 +56,10 @@ public class HeadOrientationDebug : MonoBehaviour
             }
             else
             {
-                UpdateDebugText(Vector3.zero, Vector3.zero, 0f, 0f, 0f, "No Main Camera found.");
                 return;
             }
         }
 
-        Vector3 position = headTransform.position;
         Vector3 euler = headTransform.rotation.eulerAngles;
 
         float pitch = NormalizeAngle(euler.x);
@@ -73,16 +71,13 @@ public class HeadOrientationDebug : MonoBehaviour
         if (invertYaw) yaw = -yaw;
 
         sendTimer += Time.deltaTime;
-        string status = udpReady ? "Idle" : "Not Ready";
-
         if (udpReady && sendTimer >= sendInterval)
         {
             sendTimer = 0f;
-            bool sent = SendUdpPacket(roll, pitch, yaw);
-            status = sent ? "Sending" : "Send Failed";
+            SendUdpPacket(roll, pitch, yaw);
         }
 
-        UpdateDebugText(position, euler, roll, pitch, yaw, status);
+        UpdateDebugText(roll, pitch, yaw);
     }
 
     private bool SendUdpPacket(float roll, float pitch, float yaw)
@@ -101,17 +96,14 @@ public class HeadOrientationDebug : MonoBehaviour
         }
     }
 
-    private void UpdateDebugText(Vector3 position, Vector3 rawEuler, float roll, float pitch, float yaw, string status)
+    private void UpdateDebugText(float roll, float pitch, float yaw)
     {
         if (debugText == null) return;
 
         debugText.text =
-            $"HEAD ORIENTATION\n\n" +
-            $"Roll:  {roll:F1}°\n" +
-            $"Pitch: {pitch:F1}°\n" +
-            $"Yaw:   {yaw:F1}°\n\n" +
-            $"UDP: {destinationIP}:{destinationPort}\n" +
-            $"Rate: {sendRateHz:F0} Hz";
+            $"Roll:  {roll,6:F1}°\n" +
+            $"Pitch: {pitch,6:F1}°\n" +
+            $"Yaw:   {yaw,6:F1}°";
     }
 
     private float NormalizeAngle(float angleDegrees)
