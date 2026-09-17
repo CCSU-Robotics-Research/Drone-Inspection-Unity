@@ -1,4 +1,4 @@
-# Drone-Inspection-Unity
+# Drone Inspection Unity
 
 Unity MRTK3 / OpenXR project for the HoloLens end:
 * Streams the user's head orientation (roll, pitch, yaw) over UDP to the ground station for gimbal teleoperation.
