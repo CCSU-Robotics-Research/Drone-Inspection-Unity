@@ -30,7 +30,7 @@ Both gimbal teleoperation and video feed can run simultaneously, or one at a tim
 4. Press Play in Unity. Head motion should drive the gimbal to work.
 
 ### Video Feed
-1. In the ground station repository, navigate to `camera_vision/`, source the venv with `.\.venv\Scripts\Activate.ps1`, and run `python main.py --stream`.
+1. In the ground station repository, navigate to `camera_vision/`, source the venv with `.\.venv\Scripts\Activate.ps1`, and run `python main.py`.
 2. Press Play in Unity. The VideoDisplay quad should show the feed. Even without Holographic Remoting, the video should be visible in the Game view.
 
 _For reference, the connection settings live on the VideoDisplay quad's Video Stream Receiver component in the Inspector panel. Unity will display whatever it receives. For video tuning and quality, refer to the ground station repository._
