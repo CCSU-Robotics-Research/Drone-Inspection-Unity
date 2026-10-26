@@ -1,16 +1,14 @@
 using System;
 using System.Net.Sockets;
-using System.Runtime.CompilerServices;
+
 using System.Text;
 using UnityEngine;
 
 /// <summary>
-/// Sends recording commands to the ground station for start/stop.
-/// Responsible for toggling recording on/off from the FOV; otherwise
-/// this keeps no state record of the recording. The recording
-/// indication is overlayed on the video stream with OpenCV.
+/// Sends commands for recording and live AI annotation toggles to the
+/// ground station from Unity button toggles.
 /// </summary>
-public class RecordingCommander : MonoBehaviour
+public class GroundStationCommander : MonoBehaviour
 {
     [SerializeField] private string host = "127.0.0.1";
     [SerializeField] private int port = 5011;
@@ -29,12 +27,16 @@ public class RecordingCommander : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Wired to the record button's click event.
-    /// </summary>
+    /// <summary>Wired to the record button's click event.</summary>
     public void ToggleRecording()
     {
         Send("record:toggle");
+    }
+
+    /// <summary>Wired to the annotation button's click event.</summary>
+    public void ToggleAnnotation()
+    {
+        Send("annotate:toggle");
     }
 
     private void Send(string command)
